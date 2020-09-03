@@ -3,23 +3,23 @@ import { useFrame } from 'react-three-fiber';
 import { randBetween } from './functions';
 
 const Box = (props) =>  {
-  // This reference will give us direct access to the mesh
-  const mesh = useRef()
-  
-  // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
-  
-  // Rotate mesh every frame, this is outside of React without overhead
-  let rotationNum = 0.01;
+    // This reference will give us direct access to the mesh
+    const mesh = useRef()
 
-  if(randBetween(1, 10) % 2 === 0){
-    rotationNum = rotationNum * -1;
-  }
-  console.log(mesh);
+    // Set up state for the hovered and active state
+    const [hovered, setHover] = useState(false)
+    const [active, setActive] = useState(false)
 
-  useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += rotationNum))
-  
+    // Rotate mesh every frame, this is outside of React without overhead
+    let rotationNum = 0.01;
+
+    if(randBetween(1, 10) % 2 === 0){
+        rotationNum = rotationNum * -1;
+    }
+    console.log(mesh);
+
+    useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += rotationNum))
+
     return (
         <mesh
             {...props}

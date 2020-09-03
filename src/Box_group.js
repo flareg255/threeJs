@@ -11,20 +11,25 @@ const Box_group = (props) => {
 
     useFrame(() => {
         // Some things maybe shouldn't be declarative, we're in the render-loop here with full access to the instance
-        const r = 1 * Math.sin(THREE.Math.degToRad((theta += 0.1)))
+        // const r = 1 * Math.sin(THREE.Math.degToRad((theta += 0.1)))
+        const r = THREE.Math.degToRad((theta += 0.2))
         // const s = Math.cos(THREE.Math.degToRad(theta * 2))
-        const s = Math.cos(theta * 2)
-        group.current.rotation.set(r, r, r)
-        group.current.scale.set(s, s, s)
+        // const s = Math.cos(theta * 2)
+        let s = r * 10
+        group.current.rotation.set(0, r, 0)
+        group.current.scale.set(1, 1, 1)
+        group.current.position.set(1, 1, 1)
     })
 
     const [geo, mat, coords] = useMemo(() => {
         const geo = new THREE.SphereBufferGeometry(1, 10, 10)
-        const mat = new THREE.MeshStandardMaterial({ color: new THREE.Color('orange') })
-        const coords = new Array(2000).fill().map(i => [Math.random() * 800 - 400, Math.random() * 800 - 400, Math.random() * 800 - 400])
+        const mat = new THREE.MeshStandardMaterial({ color: new THREE.Color('#123456') })
+        const coords = new Array(4000).fill().map(i => [_.random(800, true) - 400, _.random(800, true) - 400, _.random(800, true) - 400])
 
         return [geo, mat, coords]
     }, [])
+
+    console.log(group)
 
     return (
         <group ref={group}>
